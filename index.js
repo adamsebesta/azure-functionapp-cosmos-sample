@@ -8,6 +8,6 @@ module.exports = async function (context, req) {
 
   context.res = {
     // status: 200, /* Defaults to 200 */
-    body: "TEST US, Testing CI NEW NEW NEW",
+    body: "TEST US, Testing CI NEW",
   };
 };
