@@ -3,7 +3,7 @@ const Helpers = require("../helpers");
 module.exports = async function (context, req) {
     context.log("JavaScript HTTP trigger function processed a request.");
     const key = Helpers.getSecretFromVault("cosmos-primary-key");
-    const db = await Helpers.initCosmos(key, 'ToDoList');
+    const db = Helpers.initCosmos(key, 'ToDoList');
     const container = db.container('Items');
 
     const querySpec = {

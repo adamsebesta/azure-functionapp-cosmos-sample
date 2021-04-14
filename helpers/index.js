@@ -9,19 +9,19 @@ const {
 } = require("@azure/cosmos");
 
 const helpersObject = {
-  getSecretFromVault(name) {
+  async getSecretFromVault(name) {
     const credential = new DefaultAzureCredential();
     const url = process.env["KEYVAULT_URI"] || "<keyvault-url>";
     const client = new SecretClient(url, credential);
     return await client.getSecret(name);
   },
-  initCosmos(key, db) {
+  async initCosmos(key, db) {
     const endpoint = process.env["COSMOS_URI"] || "<COSMOS_URI>";
     const cosmosClient = new CosmosClient({
       endpoint,
       key,
     });
-    return cosmosClient.database(db);
+    return await cosmosClient.database(db);
 
   }
 
