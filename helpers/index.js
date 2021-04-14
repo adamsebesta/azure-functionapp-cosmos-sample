@@ -15,14 +15,22 @@ const helpersObject = {
     const client = new SecretClient(url, credential);
     return await client.getSecret(name);
   },
-  async initCosmos(key, db) {
+  async initCosmos(dbName, contName) {
+    // get db key from helper (prod) or runtime varaible (dev)
+    let key = process.env['COSMOS_DB_KEY'] || await Helpers.getSecretFromVault("cosmos-primary-key");
     const endpoint = process.env["COSMOS_URI"]
+    // init client
     const cosmosClient = new CosmosClient({
       endpoint,
       key,
     });
-    return cosmosClient.database(db);
-
+    // get db / create if doesnt exist
+    const
+      db = await cosmosClient.databases.createIfNotExists({
+        id: dbName
+      });
+    const container = db.database.container(contName);
+    return container;
   }
 
 }
