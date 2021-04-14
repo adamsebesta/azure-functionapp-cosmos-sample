@@ -1,7 +1,7 @@
 import {
     getSecretFromVault,
     initCosmos
-} from "./helpers/index.js";
+} from "../helpers";
 
 export default async function (context, req) {
     context.log("JavaScript HTTP trigger function processed a request.");
