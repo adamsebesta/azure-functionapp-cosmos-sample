@@ -1,12 +1,9 @@
-import {
-    getSecretFromVault,
-    initCosmos
-} from "../helpers";
+const Helpers = require("../helpers");
 
-export default async function (context, req) {
+module.exports = async function (context, req) {
     context.log("JavaScript HTTP trigger function processed a request.");
-    const key = getSecretFromVault("cosmos-primary-key");
-    const db = await initCosmos(key, 'ToDoList');
+    const key = Helpers.getSecretFromVault("cosmos-primary-key");
+    const db = await Helpers.initCosmos(key, 'ToDoList');
     const container = db.container('Items');
 
     const querySpec = {
