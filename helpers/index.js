@@ -25,7 +25,6 @@ const helpersObject = {
 
   }
 
-
 }
 
 module.exports = helpersObject;
