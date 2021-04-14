@@ -15,12 +15,13 @@ const helpersObject = {
     const client = new SecretClient(url, credential);
     return await client.getSecret(name);
   },
-  initCosmos(key) {
+  initCosmos(key, db) {
     const endpoint = process.env["COSMOS_URI"] || "<COSMOS_URI>";
     const cosmosClient = new CosmosClient({
       endpoint,
       key,
     });
+    return cosmosClient.database(db);
 
   }
 
