@@ -22,12 +22,12 @@ module.exports = async function (context, req) {
 
     const endpoint = "https://aasha-proto.documents.azure.com/";
     const key = secret.value;
-    const client = new CosmosClient({
+    const cosmosClient = new CosmosClient({
         endpoint,
         key,
     });
 
-    const database = client.database('ToDoList');
+    const database = cosmosClient.database('ToDoList');
     const container = database.container('Items');
 
     const querySpec = {
