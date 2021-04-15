@@ -9,15 +9,17 @@ const {
 } = require("@azure/cosmos");
 
 const helpersObject = {
-  async getSecretFromVault(name) {
+  async getSecretFromVault(name, context) {
     const credential = new DefaultAzureCredential();
     const url = process.env["KEYVAULT_URI"]
     const client = new SecretClient(url, credential);
-    return await client.getSecret(name).value;
+    let secret = await client.getSecret(name);
+    context.log(secret)
+    return secret.value
   },
   async initCosmos(dbName, contName, context) {
     // get runtime varaible (dev) or db key from helper (prod)  
-    let key = process.env['COSMOS_DB_KEY'] || await this.getSecretFromVault("cosmos-primary-key");
+    let key = process.env['COSMOS_DB_KEY'] || await this.getSecretFromVault("cosmos-primary-key", context);
     const endpoint = process.env["COSMOS_URI"]
     // init client
     context.log(endpoint, key)
