@@ -18,6 +18,7 @@ const helpersObject = {
   async initCosmos(dbName, contName) {
     // get runtime varaible (dev) or db key from helper (prod)  
     let key = process.env['COSMOS_DB_KEY'] || await this.getSecretFromVault("cosmos-primary-key");
+    console.log(key)
     const endpoint = process.env["COSMOS_URI"]
     // init client
     const cosmosClient = new CosmosClient({
