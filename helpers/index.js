@@ -20,6 +20,7 @@ const helpersObject = {
     let key = process.env['COSMOS_DB_KEY'] || await this.getSecretFromVault("cosmos-primary-key");
     console.log(key)
     const endpoint = process.env["COSMOS_URI"]
+    console.log(endpoint)
     // init client
     const cosmosClient = new CosmosClient({
       endpoint,
@@ -33,7 +34,6 @@ const helpersObject = {
     const container = db.database.container(contName);
     return container;
   }
-
 }
 
 module.exports = helpersObject;
