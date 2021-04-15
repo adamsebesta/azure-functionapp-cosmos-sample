@@ -18,21 +18,21 @@ const helpersObject = {
   async initCosmos(dbName, contName) {
     // get runtime varaible (dev) or db key from helper (prod)  
     let key = process.env['COSMOS_DB_KEY'] || await this.getSecretFromVault("cosmos-primary-key");
-    console.log(key)
+    context.log(key)
     const endpoint = process.env["COSMOS_URI"]
-    console.log(endpoint)
+    context.log(endpoint)
     // init client
-    const cosmosClient = new CosmosClient({
-      endpoint,
-      key,
-    });
-    // get db / create if doesnt exist
-    const
-      db = await cosmosClient.databases.createIfNotExists({
-        id: dbName
-      });
-    const container = db.database.container(contName);
-    return container;
+    // const cosmosClient = new CosmosClient({
+    //   endpoint,
+    //   key,
+    // });
+    // // get db / create if doesnt exist
+    // const
+    //   db = await cosmosClient.databases.createIfNotExists({
+    //     id: dbName
+    //   });
+    // const container = db.database.container(contName);
+    // return container;
   }
 }
 
